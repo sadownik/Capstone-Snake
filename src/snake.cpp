@@ -17,6 +17,8 @@ void Snake::Update() {
   if (current_cell.x != prev_cell.x || current_cell.y != prev_cell.y) {
     UpdateBody(current_cell, prev_cell);
   }
+  // Check for collisions with obstacles
+  
 }
 
 void Snake::UpdateHead() {
@@ -76,4 +78,16 @@ bool Snake::SnakeCell(int x, int y) {
     }
   }
   return false;
+}
+
+bool Obstacle::CheckForCollision(int x, int y) {
+   for(auto i = 0; i<obstacle_positions.size(); i++){
+  
+  // std::cout << head_cell.x << " " << head_cell.y << std::endl;
+    if(obstacle_positions[i][0]==x && obstacle_positions[i][1]==y ){
+      return false;
+    }
+  }
+  return true;
+  
 }

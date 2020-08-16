@@ -2,6 +2,9 @@
 #include <iostream>
 #include "SDL.h"
 #include "snake.h"
+#include "menu.h"
+#include <algorithm>
+#include "sdl_util.h"
 
 void Controller::ChangeDirection(Snake &snake, Snake::Direction input,
                                  Snake::Direction opposite) const {
@@ -35,7 +38,68 @@ void Controller::HandleInput(bool &running, Snake &snake) const {
           ChangeDirection(snake, Snake::Direction::kRight,
                           Snake::Direction::kLeft);
           break;
+
+          case SDLK_x:
+          // exit(0);
+          running = false;
+          break;
       }
     }
+  }
+}
+
+bool Controller::HandleMenuInput() {
+  SDL_Event e;
+  while (SDL_PollEvent(&e)) {
+  if (e.type == SDL_KEYDOWN) {
+    switch (e.key.keysym.sym) {
+      // case SDLK_UP:
+      //   ChangeDirection(snake, Snake::Direction::kUp,
+      //                   Snake::Direction::kDown);
+      //   break;
+
+      // case SDLK_DOWN:
+      //   ChangeDirection(snake, Snake::Direction::kDown,
+      //                   Snake::Direction::kUp);
+      //   break;
+
+      // case SDLK_LEFT:
+      //   ChangeDirection(snake, Snake::Direction::kLeft,
+      //                   Snake::Direction::kRight);
+      //   break;
+
+      case SDLK_y:
+        return true;
+        break;
+
+      case SDLK_x:
+        exit(0);
+        break;
+    }
+  }
+  }
+  return false;
+}
+
+// This function retrieves square coordinations of left mouse clicks
+void Controller::HandleMouseInput(std::vector <SDL_Point> &obstacles) {
+
+  SDL_Event e;
+  while (SDL_PollEvent(&e)) {
+    if (e.type == SDL_MOUSEBUTTONDOWN ) {
+
+      SDL_Point val {e.motion.x/20, e.motion.y/20};
+      std::vector<SDL_Point>::iterator it;
+      it = std::find(obstacles.begin(), obstacles.end(), val);
+
+      if (it == obstacles.end() || obstacles.size() == 0 ) {
+        obstacles.push_back(val);
+        return; }
+      else {
+         obstacles.erase(it);
+         return;
+        }
+    }
+
   }
 }

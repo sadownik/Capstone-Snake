@@ -25,12 +25,21 @@ Renderer::Renderer(const std::size_t screen_width,
     std::cerr << " SDL_Error: " << SDL_GetError() << "\n";
   }
 
+     // Initialize SDL_ttf library
+  //  if (TTF_Init() != 0)
+  //  {
+  //     cerr << "TTF_Init() Failed: " << TTF_GetError() << endl;
+  //     SDL_Quit();
+  //     exit(1);
+  //  }
+
   // Create renderer
   sdl_renderer = SDL_CreateRenderer(sdl_window, -1, SDL_RENDERER_ACCELERATED);
   if (nullptr == sdl_renderer) {
     std::cerr << "Renderer could not be created.\n";
     std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
   }
+
 }
 
 Renderer::~Renderer() {
@@ -38,7 +47,7 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(Snake const snake, SDL_Point const &food) {
+void Renderer::Render(Snake const snake, Obstacle const obstacle, SDL_Point const &food) {
   SDL_Rect block;
   block.w = screen_width / grid_width;
   block.h = screen_height / grid_height;
@@ -52,6 +61,16 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
   block.x = food.x * block.w;
   block.y = food.y * block.h;
   SDL_RenderFillRect(sdl_renderer, &block);
+
+  // Render obstacle
+  SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0xCC, 0xFF);
+  for(auto i = 0; i<obstacle.obstacle_positions.size(); i++){
+    block.x = obstacle.obstacle_positions[i][0] * block.w;
+    block.y = obstacle.obstacle_positions[i][1] * block.h;
+    SDL_RenderFillRect(sdl_renderer, &block);     
+
+  }
+
 
   // Render snake's body
   SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -71,9 +90,56 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
   }
   SDL_RenderFillRect(sdl_renderer, &block);
 
+
   // Update Screen
   SDL_RenderPresent(sdl_renderer);
 }
+
+void Renderer::Render() {
+  SDL_Rect block;
+  block.w = screen_width / grid_width;
+  block.h = screen_height / grid_height;
+
+  // Clear screen
+  SDL_SetRenderDrawColor(sdl_renderer, 0x1F, 0x00, 0x1F, 0xFF);
+  SDL_RenderClear(sdl_renderer);
+
+  // Update Screen
+  SDL_RenderPresent(sdl_renderer);
+}
+
+void Renderer::RenderCheckeredBoard(std::vector <SDL_Point> const &obstacles) {
+  SDL_Rect block;
+
+  block.w = screen_width / grid_width;
+  block.h = screen_height / grid_height;
+
+  
+  for(auto i = 0; i < grid_height; i ++){
+    for(auto j = 0; j < grid_width; j ++){
+        if ((i+j)%2) {
+          SDL_SetRenderDrawColor(sdl_renderer, 0xd3, 0xd3, 0xd3, 0xFF);
+        } else {
+          SDL_SetRenderDrawColor(sdl_renderer, 0x69, 0x69, 0x69, 0xFF);
+        }
+        block.x = j * block.w;
+        block.y = i * block.h;
+        SDL_RenderFillRect(sdl_renderer, &block);
+
+    }
+  }
+
+  for(auto &i: obstacles) {
+ 
+    SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x8C, 0x00, 0xFF);
+    block.x = i.x * block.w;
+    block.y = i.y * block.h;
+    SDL_RenderFillRect(sdl_renderer, &block);    
+  }
+
+  SDL_RenderPresent(sdl_renderer);
+
+ }
 
 void Renderer::UpdateWindowTitle(int score, int fps) {
   std::string title{"Snake Score: " + std::to_string(score) + " FPS: " + std::to_string(fps)};

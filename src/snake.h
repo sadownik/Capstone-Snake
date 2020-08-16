@@ -37,4 +37,22 @@ class Snake {
   int grid_height;
 };
 
+class Obstacle {
+  public:
+    Obstacle(int grid_width, int grid_height, std::vector<std::vector <int>>obstacle_positions)
+      : grid_width(grid_width),
+        grid_height(grid_height),
+        obstacle_positions(obstacle_positions) {}
+    
+    std::vector<std::vector <int>>obstacle_positions;
+    bool CheckForCollision(int x, int y);
+
+  private:
+    
+
+    int grid_width;
+    int grid_height;
+
+};
+
 #endif

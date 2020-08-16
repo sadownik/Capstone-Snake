@@ -11,12 +11,26 @@ int main() {
   constexpr std::size_t kGridWidth{32};
   constexpr std::size_t kGridHeight{32};
 
-  Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
-  Controller controller;
-  Game game(kGridWidth, kGridHeight);
-  game.Run(controller, renderer, kMsPerFrame);
-  std::cout << "Game has terminated successfully!\n";
-  std::cout << "Score: " << game.GetScore() << "\n";
-  std::cout << "Size: " << game.GetSize() << "\n";
+  const std::vector <std::vector<int>> obstaclePositions{
+    {5,5},
+    {6,5},
+    {7,5},
+    {7,6},
+    {7,7},
+    {7,8},
+    {7,9},
+  }; 
+
+  // while(true) {
+    Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
+    Controller controller;
+    Menu menu(renderer, controller);
+    Game game(kGridWidth, kGridHeight, obstaclePositions);
+    game.Run(controller, renderer, menu, kMsPerFrame);
+    std::cout << "Game has terminated successfully!\n";
+    std::cout << "Score: " << game.GetScore() << "\n";
+    std::cout << "Size: " << game.GetSize() << "\n";
+  // }
+
   return 0;
 }

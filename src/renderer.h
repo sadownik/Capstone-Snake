@@ -11,7 +11,9 @@ class Renderer {
            const std::size_t grid_width, const std::size_t grid_height);
   ~Renderer();
 
-  void Render(Snake const snake, SDL_Point const &food);
+  void Render(Snake const snake,Obstacle const obstacle, SDL_Point const &food);
+  void Render();
+  void RenderCheckeredBoard(std::vector <SDL_Point> const &obstacles);
   void UpdateWindowTitle(int score, int fps);
 
  private:
@@ -22,6 +24,7 @@ class Renderer {
   const std::size_t screen_height;
   const std::size_t grid_width;
   const std::size_t grid_height;
+  SDL_Surface *bmp;
 };
 
 #endif
