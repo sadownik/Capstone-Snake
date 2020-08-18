@@ -1,8 +1,8 @@
 # Capstone Project: Enhanced Snake Game
-######Daniel Sadowski
+#####Daniel Sadowski
 
 This Repo uses the Starter Code of the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213) and adds new features to the game. Features include bug fixes, a startscreen/menu, the ability to create a custom obstacle "map" and an option to restart the game without launching the program again. 
-<img src="snake_game.gif"/>
+<img src="obstacle.gif"/>
 
 The Capstone Project gives you a chance to integrate what you've learned throughout this program. This project will become an important part of your portfolio to share with current and future colleagues and employers.
 
