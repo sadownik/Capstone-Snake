@@ -9,35 +9,21 @@
 #include "controller.h"
 #include "renderer.h"
 
-class Square {
-    public: 
-        
-        Square(SDL_Point pos): 
-        pos(pos) {}
-        SDL_Point pos;
-        
-        
-    private: 
-        enum squareColor{defaultcolor, red};
-
-
-    
-};
-
 class Menu {
     public:
         Menu(Renderer & renderer, Controller & controller):
         renderer(renderer), controller(controller) {}
         void RenderMenu();
         void Update();
-        std::vector <SDL_Point> GetObstacles(){ return ObstacleList;};
+        std::vector <SDL_Point> GetObstacles() const {return ObstacleList;};
+        bool GetRunningState() const {return running;}
         
     private:
         void UpdateObstacles();
-        std::vector <SDL_Point> ObstacleList;// {{0,0}};
+        bool running; 
+        std::vector <SDL_Point> ObstacleList;
         Renderer renderer;
         Controller controller;
-
 
 };
 

@@ -64,11 +64,15 @@ void Renderer::Render(Snake const snake, Obstacle const obstacle, SDL_Point cons
 
   // Render obstacle
   SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0xCC, 0xFF);
-  for(auto i = 0; i<obstacle.obstacle_positions.size(); i++){
-    block.x = obstacle.obstacle_positions[i][0] * block.w;
-    block.y = obstacle.obstacle_positions[i][1] * block.h;
-    SDL_RenderFillRect(sdl_renderer, &block);     
+  // for(auto i = 0; i<obstacle.obstacle_positions.size(); i++){
+  //   block.x = obstacle.obstacle_positions[i][0] * block.w;
+  //   block.y = obstacle.obstacle_positions[i][1] * block.h;
+  //   SDL_RenderFillRect(sdl_renderer, &block);     
 
+  for(auto &i: obstacle.GetObstaclePostions()){
+    block.x = i.x * block.w;
+    block.y = i.y * block.h;
+    SDL_RenderFillRect(sdl_renderer, &block);     
   }
 
 
@@ -95,18 +99,6 @@ void Renderer::Render(Snake const snake, Obstacle const obstacle, SDL_Point cons
   SDL_RenderPresent(sdl_renderer);
 }
 
-void Renderer::Render() {
-  SDL_Rect block;
-  block.w = screen_width / grid_width;
-  block.h = screen_height / grid_height;
-
-  // Clear screen
-  SDL_SetRenderDrawColor(sdl_renderer, 0x1F, 0x00, 0x1F, 0xFF);
-  SDL_RenderClear(sdl_renderer);
-
-  // Update Screen
-  SDL_RenderPresent(sdl_renderer);
-}
 
 void Renderer::RenderCheckeredBoard(std::vector <SDL_Point> const &obstacles) {
   SDL_Rect block;

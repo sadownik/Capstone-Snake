@@ -12,7 +12,7 @@
 
 class Game {
  public:
-  Game(std::size_t grid_width, std::size_t grid_height, std::vector <std::vector<int>> obstaclePositions);
+  Game(std::size_t grid_width, std::size_t grid_height);
   void Run(Controller &controller, Renderer &renderer, Menu &menu,
            std::size_t target_frame_duration);
   int GetScore() const;

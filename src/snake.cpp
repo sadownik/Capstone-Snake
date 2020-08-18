@@ -80,14 +80,33 @@ bool Snake::SnakeCell(int x, int y) {
   return false;
 }
 
+void Snake::ResetSnake() {
+  direction = Direction::kUp;
+  speed = 0.1f;
+  size = 1;
+  head_x = (grid_width / 2);
+  head_y = (grid_height / 2);
+  alive = true; 
+  body.clear();
+
+}
+
 bool Obstacle::CheckForCollision(int x, int y) {
    for(auto i = 0; i<obstacle_positions.size(); i++){
   
   // std::cout << head_cell.x << " " << head_cell.y << std::endl;
-    if(obstacle_positions[i][0]==x && obstacle_positions[i][1]==y ){
-      return false;
+    if(obstacle_positions[i].x==x && obstacle_positions[i].y==y ){
+      return true;
     }
   }
-  return true;
+  return false;
   
+}
+
+void Obstacle::UpdatePositions(std::vector <SDL_Point> &obstacle_pos) {
+  obstacle_positions = obstacle_pos;
+}
+
+std::vector <SDL_Point> Obstacle::GetObstaclePostions() const {
+  return obstacle_positions;
 }

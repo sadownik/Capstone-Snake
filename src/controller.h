@@ -10,7 +10,7 @@ class Square;
 class Controller {
  public:
   void HandleInput(bool &running, Snake &snake) const;
-  bool HandleMenuInput();
+  bool HandleMenuInput(std::vector <SDL_Point> &obstacles);
   void HandleMouseInput(std::vector <SDL_Point> &obstacles);
 
  private:

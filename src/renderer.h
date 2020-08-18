@@ -12,7 +12,6 @@ class Renderer {
   ~Renderer();
 
   void Render(Snake const snake,Obstacle const obstacle, SDL_Point const &food);
-  void Render();
   void RenderCheckeredBoard(std::vector <SDL_Point> const &obstacles);
   void UpdateWindowTitle(int score, int fps);
 

@@ -3,9 +3,9 @@
 #include "SDL.h"
 
 
-Game::Game(std::size_t grid_width, std::size_t grid_height,std::vector <std::vector<int>> obstaclePositions)
+Game::Game(std::size_t grid_width, std::size_t grid_height)
     : snake(grid_width, grid_height),
-      obstacle(grid_width, grid_height, obstaclePositions),
+      obstacle(grid_width, grid_height),
       engine(dev()),
       random_w(0, static_cast<int>(grid_width-1)),
       random_h(0, static_cast<int>(grid_height-1)) {
@@ -21,24 +21,19 @@ void Game::Run(Controller &controller, Renderer &renderer, Menu &menu,
   int frame_count = 0;
   
 
-  // Menu menu(renderer, controller);
-  // Menu menu;
-
   while(true){
 
-    
     while(!running){
 
       menu.Update();
-
-      SDL_Delay(1);
-      if(controller.HandleMenuInput() == true){
+      if(menu.GetRunningState()== false) {
+        std::vector <SDL_Point> points = menu.GetObstacles();
+        obstacle.UpdatePositions(points);
         running = true;
+        score = 0;
         break;
       }
-      SDL_Delay(1);
     }
-    
 
     while (running) {
       frame_start = SDL_GetTicks();
@@ -79,7 +74,7 @@ void Game::PlaceFood() {
     y = random_h(engine);
     // Check that the location is not occupied by a snake item before placing
     // food.
-    if (!snake.SnakeCell(x, y) && obstacle.CheckForCollision(x,y)) {
+    if (!snake.SnakeCell(x, y) && !obstacle.CheckForCollision(x,y)) {
       food.x = x;
       food.y = y;
       return;
@@ -89,14 +84,14 @@ void Game::PlaceFood() {
 
 void Game::Update() {
   if (!snake.alive){
-    running = false;
+    // running = false;
     return;
   } 
   snake.Update();
 
   int new_x = static_cast<int>(snake.head_x);
   int new_y = static_cast<int>(snake.head_y);
-  snake.alive = obstacle.CheckForCollision(new_x, new_y);
+  snake.alive = !obstacle.CheckForCollision(new_x, new_y);
   // Check if there's food over here
   if (food.x == new_x && food.y == new_y) {
     score++;
