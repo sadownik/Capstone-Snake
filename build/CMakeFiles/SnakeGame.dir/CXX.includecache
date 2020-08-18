@@ -12,14 +12,6 @@ snake.h
 vector
 -
 
-/home/student/CppND-Capstone-Snake-Game/src/game.cpp
-game.h
-/home/student/CppND-Capstone-Snake-Game/src/game.h
-iostream
--
-SDL.h
-/home/student/CppND-Capstone-Snake-Game/src/SDL.h
-
 /home/student/CppND-Capstone-Snake-Game/src/game.h
 random
 -
@@ -33,6 +25,16 @@ renderer.h
 /home/student/CppND-Capstone-Snake-Game/src/renderer.h
 snake.h
 /home/student/CppND-Capstone-Snake-Game/src/snake.h
+
+/home/student/CppND-Capstone-Snake-Game/src/main.cpp
+iostream
+-
+controller.h
+/home/student/CppND-Capstone-Snake-Game/src/controller.h
+game.h
+/home/student/CppND-Capstone-Snake-Game/src/game.h
+renderer.h
+/home/student/CppND-Capstone-Snake-Game/src/renderer.h
 
 /home/student/CppND-Capstone-Snake-Game/src/menu.h
 vector
