@@ -2,11 +2,17 @@
 #####Daniel Sadowski
 
 This Repo uses the Starter Code of the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213) and adds new features to the game. Features include bug fixes, a startscreen/menu, the ability to create a custom obstacle "map" and an option to restart the game without launching the program again. 
-<img src="obstacle.gif"/>
+<img src="snake_game.gif"/>
 
-The Capstone Project gives you a chance to integrate what you've learned throughout this program. This project will become an important part of your portfolio to share with current and future colleagues and employers.
+The Project was extended by a new Menu Object located in the files `menu.h` and `menu.cpp`. Furthermore, a new `Obstacle` class was created within `snake.cpp` and `snake.h` to accomodate new user-created obstacles. The instructions and dependencies haven't changed. 
 
-In this project, you can build your own C++ application or extend this Snake game, following the principles you have learned throughout this Nanodegree Program. This project will demonstrate that you can independently create applications using a wide range of C++ features.
+## Gameplay and Controls
+
+Basic gameplay consists of the snake being controlled by the arrow keys. However a new  gameplay element was added - the placement of obstacles in the map. Obstacles can be added by the player before the game starts to make the game more challenging. This is done by  by left clicking a square to mark it. This can also be undone by clicking the marked square once again. Pressing `Y` on the keyboard starts a new game while pressing `X` during the game brings the player back to the Obstacle Selection. Pressing `X` during Obstacle Selection quits the game.
+
+
+
+
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
@@ -29,3 +35,19 @@ In this project, you can build your own C++ application or extend this Snake gam
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
 4. Run it: `./SnakeGame`.
+
+## Addressed Rubric Points
+Below is a list of Rubric Points and how each one was addressed in the program. 
+
+1. `The project demonstrates an understanding of C++ functions and control structures.`
+  * THx
+
+2. `The project accepts user input and processes the input.`
+
+3. `The project uses Object Oriented Programming techniques.`
+
+4. `Classes use appropriate access specifiers for class members.`
+
+5. `Class constructors utilize member initialization lists.`
+
+6. `The project makes use of references in function declarations.`
