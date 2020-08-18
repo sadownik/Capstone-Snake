@@ -25,14 +25,6 @@ Renderer::Renderer(const std::size_t screen_width,
     std::cerr << " SDL_Error: " << SDL_GetError() << "\n";
   }
 
-     // Initialize SDL_ttf library
-  //  if (TTF_Init() != 0)
-  //  {
-  //     cerr << "TTF_Init() Failed: " << TTF_GetError() << endl;
-  //     SDL_Quit();
-  //     exit(1);
-  //  }
-
   // Create renderer
   sdl_renderer = SDL_CreateRenderer(sdl_window, -1, SDL_RENDERER_ACCELERATED);
   if (nullptr == sdl_renderer) {

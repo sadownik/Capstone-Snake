@@ -40,7 +40,47 @@ Basic gameplay consists of the snake being controlled by the arrow keys. However
 Below is a list of Rubric Points and how each one was addressed in the program. 
 
 1. `The project demonstrates an understanding of C++ functions and control structures.`
-  * THx
+
+An example of this can be found Line 52-82 of `controller.cpp`. 
+ ```c++
+// This member function handles user input during the "menu" phase of \
+the program. 
+bool Controller::HandleMenuInput(std::vector <SDL_Point> &obstacles) {
+  SDL_Event e;
+  while (SDL_PollEvent(&e)) {
+  if (e.type == SDL_KEYDOWN) {
+    switch (e.key.keysym.sym) {
+
+      case SDLK_y:
+        return false;
+        break;
+
+      case SDLK_x:
+        exit(0);
+        break;
+    }
+  }
+  //If the mouse button is pressed the current location of the cursor is \
+  searched within the obstacles vector. If it isn't found it is being added \
+  else it is erased (unselecting the cell) providing only unique cells. 
+  if (e.type == SDL_MOUSEBUTTONDOWN ) {
+
+  SDL_Point val { e.motion.x/((long unsigned int)screen_width/grid_width), e.motion.y/((long unsigned int)screen_height/grid_height)};
+  std::vector<SDL_Point>::iterator it;
+  it = std::find(obstacles.begin(), obstacles.end(), val);
+
+  if (it == obstacles.end() || obstacles.size() == 0 )
+    obstacles.push_back(val);
+ 
+  else
+    obstacles.erase(it);
+ 
+    }
+  }
+  return true;
+}
+
+```
 
 2. `The project accepts user input and processes the input.`
 

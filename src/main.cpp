@@ -22,7 +22,7 @@ int main() {
   }; 
 
     Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
-    Controller controller;
+    Controller controller(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
     Menu menu(renderer, controller);
     Game game(kGridWidth, kGridHeight);
     game.Run(controller, renderer, menu, kMsPerFrame);
