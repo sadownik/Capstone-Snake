@@ -26,6 +26,8 @@ void Game::Run(Controller &controller, Renderer &renderer, Menu &menu,
     while(!running){
 
       menu.Update();
+      // if the user request to start a game, we retrieve the obstacle vector and write it to the obstacle object. \
+      with the flag running set to true we will then enter the next while loop and reset the score
       if(menu.GetRunningState()== false) {
         std::vector <SDL_Point> points = menu.GetObstacles();
         obstacle.UpdatePositions(points);

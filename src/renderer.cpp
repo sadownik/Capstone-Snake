@@ -56,10 +56,6 @@ void Renderer::Render(Snake const snake, Obstacle const obstacle, SDL_Point cons
 
   // Render obstacle
   SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0xCC, 0xFF);
-  // for(auto i = 0; i<obstacle.obstacle_positions.size(); i++){
-  //   block.x = obstacle.obstacle_positions[i][0] * block.w;
-  //   block.y = obstacle.obstacle_positions[i][1] * block.h;
-  //   SDL_RenderFillRect(sdl_renderer, &block);     
 
   for(auto &i: obstacle.GetObstaclePostions()){
     block.x = i.x * block.w;
@@ -98,7 +94,7 @@ void Renderer::RenderCheckeredBoard(std::vector <SDL_Point> const &obstacles) {
   block.w = screen_width / grid_width;
   block.h = screen_height / grid_height;
 
-  
+  // Render all squares in 2 different colors
   for(auto i = 0; i < grid_height; i ++){
     for(auto j = 0; j < grid_width; j ++){
         if ((i+j)%2) {
@@ -112,7 +108,7 @@ void Renderer::RenderCheckeredBoard(std::vector <SDL_Point> const &obstacles) {
 
     }
   }
-
+  // render all obstacles from the obstacle list in an orange color
   for(auto &i: obstacles) {
  
     SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x8C, 0x00, 0xFF);
