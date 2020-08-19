@@ -1,10 +1,11 @@
 # Capstone Project: Enhanced Snake Game
-#####Daniel Sadowski
 
 This Repo uses the Starter Code of the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213) and adds new features to the game. Features include bug fixes, a startscreen/menu, the ability to create a custom obstacle "map" and an option to restart the game without launching the program again. 
-<img src="snake_game.gif"/>
+<img src="obstacle_menu.gif"/>
 
 The Project was extended by a new Menu Object located in the files `menu.h` and `menu.cpp`. Furthermore, a new `Obstacle` class was created within `snake.cpp` and `snake.h` to accomodate new user-created obstacles. The instructions and dependencies haven't changed. 
+
+<img src="schematic.png"/>
 
 ## Gameplay and Controls
 
@@ -39,9 +40,11 @@ Basic gameplay consists of the snake being controlled by the arrow keys. However
 ## Addressed Rubric Points
 Below is a list of Rubric Points and how each one was addressed in the program. 
 
-1. `The project demonstrates an understanding of C++ functions and control structures.`
+1. **The project demonstrates an understanding of C++ functions and control structures.**
+2. **The project accepts user input and processes the input.**
 
-An example of this can be found Line 52-82 of `controller.cpp`. 
+Line 52-82 of `controller.cpp` shows how both points were addressed. The player is able to
+select Squares as game obstacles. Basically user input is being handled and stored in a vector.
  ```c++
 // This member function handles user input during the "menu" phase of \
 the program. 
@@ -82,12 +85,19 @@ bool Controller::HandleMenuInput(std::vector <SDL_Point> &obstacles) {
 
 ```
 
-2. `The project accepts user input and processes the input.`
+3. **The project uses Object Oriented Programming techniques.**
+4. **Classes use appropriate access specifiers for class members.**
+This was addressed by the creation of new `menu` and `obstacle` Objects as well as by the extention of classes by new member functions.  
+&nbsp;
 
-3. `The project uses Object Oriented Programming techniques.`
+5. **Class constructors utilize member initialization lists.**
+6. **The project makes use of references in function declarations.**
 
-4. `Classes use appropriate access specifiers for class members.`
+An example of this can be seen in Line 12-15 in `menu.h`:
 
-5. `Class constructors utilize member initialization lists.`
-
-6. `The project makes use of references in function declarations.`
+```c++
+class Menu {
+    public:
+        Menu(Renderer & renderer, Controller & controller):
+        renderer(renderer), controller(controller) {}
+```

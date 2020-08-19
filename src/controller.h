@@ -18,7 +18,6 @@ class Controller {
       grid_height(grid_height) {}
   void HandleInput(bool &running, Snake &snake) const;
   bool HandleMenuInput(std::vector <SDL_Point> &obstacles);
-  void HandleMouseInput(std::vector <SDL_Point> &obstacles);
 
  private:
   void ChangeDirection(Snake &snake, Snake::Direction input,
